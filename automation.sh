@@ -1,3 +1,4 @@
+#comment
 echo "input your name.."
 read dir
 echo "input your facebook.."
