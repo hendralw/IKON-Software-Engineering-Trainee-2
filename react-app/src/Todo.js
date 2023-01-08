@@ -48,8 +48,10 @@ export default function Todo() {
             <div className='container' key={data.id} >
               <ul className="list-group list-group-flush" >
                 <li className="list-group-item" >
-                  <input className="form-check-input me-1" type="checkbox"
-                    checked={data.isComplete} defaultValue id="firstCheckboxStretched"
+                  <input className="form-check-input me-1"
+                    type="checkbox"
+                    checked={data.isComplete}
+                    defaultValue id="firstCheckboxStretched"
                     onChange={e => { edit(data.id, data.title, e.target.checked) }} />
                   <label className={data.isComplete ? 'strike-out' : 'none-strike-out'}>{data.title}</label>
 

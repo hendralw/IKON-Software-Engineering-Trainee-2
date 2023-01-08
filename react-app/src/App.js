@@ -7,6 +7,7 @@ import Home from './home.js';
 import About from './About.js';
 import Todo from './Todo.js';
 import Error from './error';
+import Form from './Form';
 import { BrowserRouter, Link, Redirect, Route, Routes } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';
@@ -52,7 +53,7 @@ function App() {
               </li>
               <li className='li-5'>
                 <FontAwesomeIcon icon={faCheckCircle} style={{ marginRight: "10px", color: "grey" }} />
-                <Link to="/error" style={{ color: "black", textDecoration: "none" }}>Form</Link>
+                <Link to="/form" style={{ color: "black", textDecoration: "none" }}>Form</Link>
               </li>
             </ul>
           </Offcanvas.Body>
@@ -62,7 +63,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/todos" element={<Todo />} />
-          <Route path="/form" element={<Error />} />
+          <Route path="/form" element={<Form />} />
           <Route path="*" element={<Error />} />
         </Routes>
       </div >
