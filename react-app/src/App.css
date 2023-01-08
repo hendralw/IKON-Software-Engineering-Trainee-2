@@ -71,6 +71,19 @@
   width: inherit;
 }
 
+.button-nav {
+  margin-top: 15px;
+  margin-left: 15px;
+}
+
+.scale-15 {
+  scale: 1.5
+}
+
+.li-5 {
+  margin-bottom: 5px;
+}
+
 body,
 html {
   height: 100%;
@@ -79,6 +92,10 @@ html {
 
 body {
   overflow: hidden;
+}
+
+ul {
+  list-style-type: none;
 }
 
 /* 

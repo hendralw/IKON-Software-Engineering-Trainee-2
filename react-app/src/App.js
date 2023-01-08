@@ -3,94 +3,71 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import { ReactDOM, useState } from 'react';
 import Judul from './TodoTitle.js';
-
+import Home from './home.js';
+import About from './About.js';
+import Todo from './Todo.js';
+import Error from './error';
+import { BrowserRouter, Link, Redirect, Route, Routes } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
+import Offcanvas from 'react-bootstrap/Offcanvas';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars, faHouse, faInfoCircle, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 let nextId = 3;
 
 function App() {
+  const [show, setShow] = useState(false);
 
-  const [todo, setTodo] = useState('');
-  const [listTodo, setListTodo] = useState(
-    [
-      {
-        id: 1,
-        title: "Mengerjakan Exercice",
-        isComplete: false
-      },
-      {
-        id: 2,
-        title: "Mengerjakan Assesment",
-        isComplete: false
-      }
-    ]
-  );
-
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   return (
-    <div className="App container">
-      <header className="App-header container" style={{ width: "450px" }}>
-        <Judul />
-        <div className='todo-form'>
-          <input type="text"
-            value={todo}
-            className='todo-form-input'
-            placeholder='  Add todo...'
-            onChange={e => setTodo(e.target.value)}
-          />
+    <BrowserRouter>
+      <div>
+        <Button className='button-nav' variant="" onClick={handleShow} >
+          <div className='scale-15'>
+            <FontAwesomeIcon icon={faBars} />
+          </div>
+        </Button>
 
-          <button type="button"
-            className='' style={{ background: "#ffffff00", border: "none", position: "static", marginLeft: "-80px", fontWeight: "bold", fontSize: "13px" }}
-            onClick={submitTodo}>
-            Submit
-          </button>
-        </div>
-        {
-          listTodo.map(data => (
-            <div className='container' key={data.id} >
-              <ul className="list-group list-group-flush" >
-                <li className="list-group-item" >
-                  <input className="form-check-input me-1" type="checkbox"
-                    checked={data.isComplete} defaultValue id="firstCheckboxStretched"
-                    onChange={e => { edit(data.id, data.title, e.target.checked) }} />
-                  <label className={data.isComplete ? 'strike-out' : 'none-strike-out'}>{data.title}</label>
+        <Offcanvas show={show} onHide={handleClose}>
+          <Offcanvas.Header closeButton>
+            <Offcanvas.Title>Menu</Offcanvas.Title>
+          </Offcanvas.Header>
+          <Offcanvas.Body>
+            <ul >
+              <li className='li-5'>
+                <FontAwesomeIcon icon={faHouse} style={{ marginRight: "10px", color: "grey" }} />
+                <Link to="/" style={{ color: "black", textDecoration: "none" }}>Home</Link>
+              </li>
+              <li className='li-5'>
+                <FontAwesomeIcon icon={faInfoCircle} style={{ marginRight: "10px", color: "grey" }} />
+                <Link to="/about" style={{ color: "black", textDecoration: "none" }}>About</Link>
+              </li>
+              <li className='li-5'>
+                <FontAwesomeIcon icon={faCheckCircle} style={{ marginRight: "10px", color: "grey" }} />
+                <Link to="/todos" style={{ color: "black", textDecoration: "none" }}>Todos App</Link>
+              </li>
+              <li className='li-5'>
+                <FontAwesomeIcon icon={faCheckCircle} style={{ marginRight: "10px", color: "grey" }} />
+                <Link to="/error" style={{ color: "black", textDecoration: "none" }}>Error</Link>
+              </li>
+              <li className='li-5'>
+                <FontAwesomeIcon icon={faCheckCircle} style={{ marginRight: "10px", color: "grey" }} />
+                <Link to="/error" style={{ color: "black", textDecoration: "none" }}>Form</Link>
+              </li>
+            </ul>
+          </Offcanvas.Body>
+        </Offcanvas>
 
-                  <button type="button"
-                    style={{ background: "#ffffff00", border: "none", position: "", float: 'right', fontSize: "13px" }}
-                    onClick={() => remove(data)}>
-                    Delete
-                  </button>
-                </li>
-              </ul>
-            </div>
-          ))
-        }
-      </header >
-    </div >
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/todos" element={<Todo />} />
+          <Route path="/form" element={<Error />} />
+          <Route path="*" element={<Error />} />
+        </Routes>
+      </div >
+    </BrowserRouter >
   );
-
-  function submitTodo() {
-    if (todo === "") {
-      return alert("Please input todo!")
-    }
-
-    setTodo('');
-    setListTodo([
-      ...listTodo,
-      { id: nextId++, title: todo, isComplete: false }
-    ]);
-  }
-
-  function edit(id, title, isComplete) {
-    const newTodo = listTodo.map((todo => todo.id === id ? { id, title, isComplete } : todo
-    ));
-    setListTodo(newTodo);
-  }
-
-  function remove(data) {
-    console.log("clicked")
-    setListTodo(
-      listTodo.filter(x =>
-        x.id !== data.id)
-    );
-  }
 }
 
 export default App;
