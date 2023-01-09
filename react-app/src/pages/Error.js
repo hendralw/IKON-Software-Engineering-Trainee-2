@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
-import "./error.scss"
-export default function error() {
+import "../asset/scss/error.scss"
+
+export default function Error() {
     return (
         <div>
             <div className="face">
@@ -22,6 +23,4 @@ export default function error() {
             </Link>
         </div>
     )
-
-
 }

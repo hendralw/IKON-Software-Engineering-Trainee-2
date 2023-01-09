@@ -1,9 +1,8 @@
-import logo from './logo.svg';
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.css';
-import { ReactDOM, useState } from 'react';
-import Judul from './TodoTitle.js';
-import { BrowserRouter, Link, Redirect, Route, Routes } from 'react-router-dom';
+import '../App.css'
+import 'bootstrap/dist/css/bootstrap.css'
+import { useState } from 'react'
+import Judul from '../component/TodoTitle.js'
+import Header from '../component/Header'
 
 let nextId = 3;
 
@@ -26,19 +25,20 @@ export default function Todo() {
   );
 
   return (
-    <div className="App container">
+    <div className="App">
+      <Header />
       <header className="App-header container" style={{ width: "450px" }}>
         <Judul />
         <div className='todo-form'>
           <input type="text"
             value={todo}
-            className='todo-form-input'
-            placeholder='  Add todo...'
+            className='todo-form-input form-control'
+            placeholder='Add todo...'
             onChange={e => setTodo(e.target.value)}
           />
 
           <button type="button"
-            className='' style={{ background: "#ffffff00", border: "none", position: "static", marginLeft: "-80px", fontWeight: "bold", fontSize: "13px" }}
+            className='btn btn-primary btn-sm btn-block mt-2 mb-2'
             onClick={submitTodo}>
             Submit
           </button>

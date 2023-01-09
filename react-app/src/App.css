@@ -73,7 +73,6 @@
 
 .button-nav {
   margin-top: 15px;
-  margin-left: 15px;
 }
 
 .scale-15 {
@@ -90,15 +89,15 @@ html {
   margin: 0;
 }
 
-body {
+/* body {
   overflow: hidden;
-}
+} */
 
 ul {
   list-style-type: none;
 }
 
-/* 
-* {
+
+/* * {
   border: 1px solid black;
 } */

@@ -1,35 +1,15 @@
-import LogoAtas from "./asset/img/logo-ALTA@2x.png";
-import profil from "./asset/img/matthew-hamilton-tNCH0sKSZbA-unsplash.jpg";
-import LogoBawah from "./asset/img/logo-ALTA-v2.png";
-import LogoFB from "./asset/img/ic_fb@2x.png";
-import LogoTwitter from "./asset/img/ic-twitter@2x.png";
-import LogoIG from "./asset/img/ic-instagram@2x.png";
-import LogoLinkedin from "./asset/img/ic-linkedin@2x.png";
-import { Link } from "react-router-dom";
+import profil from "../asset/img/matthew-hamilton-tNCH0sKSZbA-unsplash.jpg"
+import LogoBawah from "../asset/img/logo-ALTA-v2.png"
+import LogoFB from "../asset/img/ic_fb@2x.png"
+import LogoTwitter from "../asset/img/ic-twitter@2x.png"
+import LogoIG from "../asset/img/ic-instagram@2x.png"
+import LogoLinkedin from "../asset/img/ic-linkedin@2x.png"
+import Header from "../component/Header"
+
 export default function About() {
     return (
         <div>
-            <header>
-                <div className="container">
-                    <div className="row align-items-center">
-                        <div className="col-lg-8 col-md-12 col-sm-12 col-12">
-                            <div className="alterra">
-                                <Link to={'/'}><img className="logo-atas" src={LogoAtas} /></Link>
-                            </div>
-                        </div>
-                        <div className="col-lg-4 col-md-12 col-sm-12 col-12">
-                            {/* <div class="container"> */}
-                            <div className="row align-items-center navig">
-                                <div className="col-lg-3 col-md-3 col-sm-3 text-md-center text-sm-center text-lg-right"><Link to={'/'}>HOME</Link></div>
-                                <div className="col-lg-3 col-md-3 col-sm-3 text-md-center text-sm-center text-lg-center"><Link to={'/about'} className="aktif">ABOUT</Link></div>
-                                <div className="col-lg-3 col-md-3 col-sm-3 text-md-center text-sm-center text-lg-left"><a href="#">EXPERIENCE</a></div>
-                                <div className="col-lg-3 col-md-3 col-sm-3 text-md-center text-sm-center text-lg-right"><a href="form.html">CONTACT</a></div>
-                            </div>
-                            {/* </div> */}
-                        </div>
-                    </div>
-                </div>
-            </header>
+            <Header />
             <div className="container-fluid about-me">
                 <h1 className="container pl-2 pt-5 pb-5">
                     ABOUT ME.
