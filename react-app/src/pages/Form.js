@@ -73,13 +73,13 @@ export default function Form() {
                             </div>
 
                             <span>Kelas Coding yang Dipilih</span>
-                            <select className="form-select md-3 mb-2 mt-2" {...register("kelas_coding")}>
+                            <select className="form-select md-3 mb-2 mt-2" {...register("kelas_coding", { required: true })}>
                                 <option value="">Pilih salah satu program</option>
                                 <option value="Backend Engineer">Backend Engineer</option>
                                 <option value="Frontend Engineer">Frontend Engineer</option>
                                 <option value="Fullstack Engineer">Fullstack Engineer</option>
                             </select>
-
+                            {errors.image?.type === 'required' && <p role="alert" style={{ color: "red" }}>Kelas harus diisi</p>}
                             <span>Foto Surat Kesungguhan</span>
 
                             <input

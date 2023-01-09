@@ -6,7 +6,7 @@ import Header from "../component/Header"
 
 function Home() {
     return (
-        <div className="home-background">
+        <div className="home-background" style={{ overflow: "hidden" }}>
             <Header />
             <div className="container h-100">
                 <div className="row align-items-center isi-home">
