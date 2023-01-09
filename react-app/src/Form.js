@@ -79,7 +79,7 @@ export default function Form() {
             <div>
                 <div>Foto Surat Kesungguhan</div>
 
-                <input {...register("file")} type="file"
+                <input {...register("image")} required type="file" name="image"
                 />
             </div>
 
@@ -97,6 +97,7 @@ export default function Form() {
     );
 
     function submit(data) {
+        data.image = data.image[0].name
         console.log(JSON.stringify(data))
         alert(
             "Data pendaftar " + data.nama_lengkap + " berhasil diterima"
