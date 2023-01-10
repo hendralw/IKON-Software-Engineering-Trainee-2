@@ -3,26 +3,14 @@ import 'bootstrap/dist/css/bootstrap.css'
 import { useState } from 'react'
 import Judul from '../component/TodoTitle.js'
 import Header from '../component/Header'
-
-let nextId = 3;
+import { useDispatch, useSelector } from 'react-redux'
+import { addTodo, removeTodo, editTodo } from "../store/todo"
 
 export default function Todo() {
 
+  const dispatch = useDispatch();
+  const listTodo = useSelector((s) => s.todo.lists);
   const [todo, setTodo] = useState('');
-  const [listTodo, setListTodo] = useState(
-    [
-      {
-        id: 1,
-        title: "Mengerjakan Exercice",
-        isComplete: false
-      },
-      {
-        id: 2,
-        title: "Mengerjakan Assesment",
-        isComplete: false
-      }
-    ]
-  );
 
   return (
     <div className="App">
@@ -30,6 +18,7 @@ export default function Todo() {
       <header className="App-header container" style={{ width: "450px" }}>
         <Judul />
         <div className='todo-form'>
+
           <input type="text"
             value={todo}
             className='todo-form-input form-control'
@@ -39,7 +28,7 @@ export default function Todo() {
 
           <button type="button"
             className='btn btn-primary btn-sm btn-block mt-2 mb-2'
-            onClick={submitTodo}>
+            onClick={() => dispatch(addTodo(todo))}>
             Submit
           </button>
         </div>
@@ -52,12 +41,16 @@ export default function Todo() {
                     type="checkbox"
                     checked={data.isComplete}
                     defaultValue id="firstCheckboxStretched"
-                    onChange={e => { edit(data.id, data.title, e.target.checked) }} />
+                    onChange={(e) => dispatch(editTodo({
+                      id: data.id,
+                      title: data.title,
+                      isComplete: e.target.checked
+                    }))} />
                   <label className={data.isComplete ? 'strike-out' : 'none-strike-out'}>{data.title}</label>
 
                   <button type="button"
                     style={{ background: "#ffffff00", border: "none", position: "", float: 'right', fontSize: "13px" }}
-                    onClick={() => remove(data)}>
+                    onClick={() => dispatch(removeTodo(data.id))}>
                     Delete
                   </button>
                 </li>
@@ -68,30 +61,4 @@ export default function Todo() {
       </header >
     </div >
   );
-
-  function submitTodo() {
-    if (todo === "") {
-      return alert("Please input todo!")
-    }
-
-    setTodo('');
-    setListTodo([
-      ...listTodo,
-      { id: nextId++, title: todo, isComplete: false }
-    ]);
-  }
-
-  function edit(id, title, isComplete) {
-    const newTodo = listTodo.map((todo => todo.id === id ? { id, title, isComplete } : todo
-    ));
-    setListTodo(newTodo);
-  }
-
-  function remove(data) {
-    console.log("clicked")
-    setListTodo(
-      listTodo.filter(x =>
-        x.id !== data.id)
-    );
-  }
 }
