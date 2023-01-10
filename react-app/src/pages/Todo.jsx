@@ -1,7 +1,7 @@
 import '../App.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import { useState } from 'react'
-import Judul from '../component/TodoTitle.js'
+import Judul from '../component/TodoTitle'
 import Header from '../component/Header'
 import { useDispatch, useSelector } from 'react-redux'
 import { addTodo, removeTodo, editTodo } from "../store/todo"
