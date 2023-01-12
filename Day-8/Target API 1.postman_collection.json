@@ -1,0 +1,180 @@
+{
+	"info": {
+		"_postman_id": "538350f2-1645-4bab-a2ce-b9bdd5dcd450",
+		"name": "Target API 1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13567282"
+	},
+	"item": [
+		{
+			"name": "API 1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Target API 1}}/v2/everything?q=apple&from=2023-01-11&to=2023-01-11&sortBy=popularity&apiKey=fdfa93e6c80d4973a37142c6c29ba059",
+					"host": [
+						"{{Target API 1}}"
+					],
+					"path": [
+						"v2",
+						"everything"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "apple"
+						},
+						{
+							"key": "from",
+							"value": "2023-01-11"
+						},
+						{
+							"key": "to",
+							"value": "2023-01-11"
+						},
+						{
+							"key": "sortBy",
+							"value": "popularity"
+						},
+						{
+							"key": "apiKey",
+							"value": "fdfa93e6c80d4973a37142c6c29ba059"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API 2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Target API 1}}/v2/everything?apiKey=fdfa93e6c80d4973a37142c6c29ba059&q=tesla&from=2022-12-12&sortBy=publishedAt",
+					"host": [
+						"{{Target API 1}}"
+					],
+					"path": [
+						"v2",
+						"everything"
+					],
+					"query": [
+						{
+							"key": "apiKey",
+							"value": "fdfa93e6c80d4973a37142c6c29ba059"
+						},
+						{
+							"key": "q",
+							"value": "tesla"
+						},
+						{
+							"key": "from",
+							"value": "2022-12-12"
+						},
+						{
+							"key": "sortBy",
+							"value": "publishedAt"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API 3",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Target API 1}}/v2/top-headlines?apiKey=fdfa93e6c80d4973a37142c6c29ba059&country=us&category=business",
+					"host": [
+						"{{Target API 1}}"
+					],
+					"path": [
+						"v2",
+						"top-headlines"
+					],
+					"query": [
+						{
+							"key": "apiKey",
+							"value": "fdfa93e6c80d4973a37142c6c29ba059"
+						},
+						{
+							"key": "country",
+							"value": "us"
+						},
+						{
+							"key": "category",
+							"value": "business"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API 4",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Target API 1}}/v2/top-headlines?apiKey=fdfa93e6c80d4973a37142c6c29ba059&sources=techcrunch",
+					"host": [
+						"{{Target API 1}}"
+					],
+					"path": [
+						"v2",
+						"top-headlines"
+					],
+					"query": [
+						{
+							"key": "apiKey",
+							"value": "fdfa93e6c80d4973a37142c6c29ba059"
+						},
+						{
+							"key": "sources",
+							"value": "techcrunch"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API 5",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Target API 1}}/v2/everything?apiKey=fdfa93e6c80d4973a37142c6c29ba059&domains=wsj.com",
+					"host": [
+						"{{Target API 1}}"
+					],
+					"path": [
+						"v2",
+						"everything"
+					],
+					"query": [
+						{
+							"key": "apiKey",
+							"value": "fdfa93e6c80d4973a37142c6c29ba059"
+						},
+						{
+							"key": "domains",
+							"value": "wsj.com"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "environtmenturl",
+			"value": "https://virtserver.swaggerhub.com/sepulsa/RentABook-API/1.0.0"
+		}
+	]
+}

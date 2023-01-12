@@ -1,0 +1,102 @@
+{
+	"info": {
+		"_postman_id": "00531560-a3fc-4dca-ba4b-ffc239ad3eaf",
+		"name": "Target API 2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13567282"
+	},
+	"item": [
+		{
+			"name": "Get People",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Target API 2}}/people/1",
+					"host": [
+						"{{Target API 2}}"
+					],
+					"path": [
+						"people",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Planets",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Target API 2}}/planets/3",
+					"host": [
+						"{{Target API 2}}"
+					],
+					"path": [
+						"planets",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Starships",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Target API 2}}/starships/9/",
+					"host": [
+						"{{Target API 2}}"
+					],
+					"path": [
+						"starships",
+						"9",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Films",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Target API 2}}/films/1/",
+					"host": [
+						"{{Target API 2}}"
+					],
+					"path": [
+						"films",
+						"1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Vehicles",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Target API 2}}/vehicles/4",
+					"host": [
+						"{{Target API 2}}"
+					],
+					"path": [
+						"vehicles",
+						"4"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
