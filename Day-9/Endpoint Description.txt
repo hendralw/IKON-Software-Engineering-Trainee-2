@@ -1,0 +1,5 @@
+GET/v1/messages -> digunakan untuk get all data (tanpa parameter id). hanya bisa diakses dengan method GET.
+
+POST/v1/messages -> digunakan untuk add data dengan parameter body raw json. apabila diakses dengan method GET, maka akan melakukan akses ke api method get, bukan POST (walaupun mengirimkan parameter body raw json). 
+
+DELETE/v1/messages/{messageId} -> digunakan untuk menghapus data id tertentu dan tidak bisa diakses dengan method selain DELETE.
