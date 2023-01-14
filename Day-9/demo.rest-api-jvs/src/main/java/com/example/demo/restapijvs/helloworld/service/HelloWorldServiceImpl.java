@@ -4,16 +4,19 @@ import com.example.demo.restapijvs.helloworld.model.RequestModel;
 import com.example.demo.restapijvs.helloworld.model.ResponseModel;
 import com.example.demo.restapijvs.utils.ResponseApi;
 import com.example.demo.restapijvs.utils.ValidationApi;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
 public class HelloWorldServiceImpl implements HelloWorldService {
     ResponseApi resp;
+    ResponseModel data;
 
     @Override
     public ResponseApi getHelloWorld() {
-        var data = new ResponseModel("Hello World");
+        data = new ResponseModel("Hello World");
         resp = new ResponseApi(
                 HttpStatus.OK.value(),
                 "Success get Data",
@@ -36,7 +39,7 @@ public class HelloWorldServiceImpl implements HelloWorldService {
             return resp;
         }
 
-        var data = new ResponseModel(request.getMsg());
+        data = new ResponseModel(request.getMsg());
         resp = new ResponseApi(
                 HttpStatus.OK.value(),
                 "Success create Data",
@@ -48,7 +51,7 @@ public class HelloWorldServiceImpl implements HelloWorldService {
 
     @Override
     public ResponseApi deleteHelloWorld() {
-        var data = new ResponseModel("Hello World");
+        data = new ResponseModel("Hello World");
         resp = new ResponseApi(
                 HttpStatus.OK.value(),
                 "Success delete Data",
