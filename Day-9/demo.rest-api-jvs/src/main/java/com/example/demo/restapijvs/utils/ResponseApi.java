@@ -57,4 +57,14 @@ public class ResponseApi<T> {
         );
         return resp;
     }
+
+    public ResponseApi BadRequest(String message) {
+        var resp = new ResponseApi<>(
+                HttpStatus.BAD_REQUEST.value(),
+                message,
+                HttpStatus.BAD_REQUEST.getReasonPhrase(),
+                null
+        );
+        return resp;
+    }
 }

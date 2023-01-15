@@ -9,4 +9,6 @@ public interface UserService {
     List<UserEntity> getUsers();
 
     Optional<UserEntity> getUserById(Integer userId);
+
+    Optional<UserEntity> addUser(UserEntity param);
 }

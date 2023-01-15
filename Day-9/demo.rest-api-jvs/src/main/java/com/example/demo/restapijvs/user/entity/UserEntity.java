@@ -4,15 +4,15 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.*;
 
 @Entity
 @Table(name = "springboot_user_tbl")
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class UserEntity {
     @Id
     @Column(name = "id")
@@ -22,20 +22,19 @@ public class UserEntity {
     @Column(name = "name")
     @Getter
     @Setter
+    @NotNull(message = "name must not be null")
+    @NotBlank(message = "name must not be blank")
     private String name;
     @Column(name = "email")
     @Getter
     @Setter
+    @NotNull(message = "email must not be null")
+    @NotBlank(message = "email must not be blank")
     private String email;
     @Column(name = "password")
     @Getter
     @Setter
+    @NotNull(message = "password must not be null")
+    @NotBlank(message = "password must not be blank")
     private String password;
-
-    public UserEntity(int id, String name, String email, String password) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.password = password;
-    }
 }
