@@ -15,4 +15,6 @@ public interface UserService {
     ResponseEntity<ResponseApi> addUser(UserRequestModel param);
 
     ResponseEntity<ResponseApi> deleteUser(Integer userId);
+
+    ResponseEntity<ResponseApi> updateUser(UserRequestModel param);
 }

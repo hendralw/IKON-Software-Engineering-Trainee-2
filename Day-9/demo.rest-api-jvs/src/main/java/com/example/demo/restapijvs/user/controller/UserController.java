@@ -44,4 +44,10 @@ public class UserController {
         var result = userService.deleteUser(userId);
         return result;
     }
+
+    @PutMapping("/v1/users")
+    public ResponseEntity<ResponseApi> updateUser(@RequestBody UserRequestModel request) {
+        var result = userService.updateUser(request);
+        return result;
+    }
 }

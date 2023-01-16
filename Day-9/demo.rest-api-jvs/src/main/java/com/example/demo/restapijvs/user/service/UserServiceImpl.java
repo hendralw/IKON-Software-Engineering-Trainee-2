@@ -130,4 +130,33 @@ public class UserServiceImpl implements UserService {
             return new ResponseEntity<>(responseApi.InternalServerError(ex), headers, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @Override
+    public ResponseEntity<ResponseApi> updateUser(UserRequestModel request) {
+        var correlationId = new Headers().GenerateCorrelationId();
+        var headers = new Headers().SetCorrelationId(correlationId);
+        try {
+            log.info(correlationId + " --- [LOG] UserServiceImpl/addUser is called");
+            log.info(correlationId + " --- [LOG] Validation request is called");
+            var validate = new ValidationApi<>(request).Validate();
+            if (!validate.equals("")) {
+                log.info(correlationId + " --- [LOG] Validation went wrong : " + validate);
+                return new ResponseEntity<>(responseApi.BadRequest(validate), headers, HttpStatus.BAD_REQUEST);
+            }
+            var result = userRepository.findById(request.getId());
+            if (!result.isEmpty()) {
+                var updatedUser = modelMapper.map(request, UserEntity.class);
+                userRepository.save(updatedUser);
+                var resultJson = new Json<>().toJson(updatedUser);
+                log.info(correlationId + " --- [LOG] Result from userRepository -> " + resultJson);
+                var data = modelMapper.map(updatedUser, UserResponseModel.class);
+                return new ResponseEntity<>(responseApi.HttpStatusOK("Success add Data", data), headers, HttpStatus.OK);
+            }
+            log.info(correlationId + " --- [LOG] Data not found from database");
+            return new ResponseEntity<>(responseApi.DataNotFound(), headers, HttpStatus.FORBIDDEN);
+        } catch (Exception ex) {
+            log.error(correlationId + " --- [LOG] Error exception -> " + ex);
+            return new ResponseEntity<>(responseApi.InternalServerError(ex), headers, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
