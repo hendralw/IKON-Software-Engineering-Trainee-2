@@ -5,8 +5,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
 
 @NoArgsConstructor
+@Service
 public class ResponseApi<T> {
     @Getter
     @Setter

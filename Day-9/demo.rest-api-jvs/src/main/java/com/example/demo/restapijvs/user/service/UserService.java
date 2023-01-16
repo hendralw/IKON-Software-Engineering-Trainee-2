@@ -1,14 +1,16 @@
 package com.example.demo.restapijvs.user.service;
 
 import com.example.demo.restapijvs.user.entity.UserEntity;
+import com.example.demo.restapijvs.user.model.UserRequestModel;
+import com.example.demo.restapijvs.utils.ResponseApi;
+import org.springframework.http.ResponseEntity;
 
-import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
-    List<UserEntity> getUsers();
+    ResponseEntity<ResponseApi> getUsers();
 
-    Optional<UserEntity> getUserById(Integer userId);
+    ResponseEntity<ResponseApi> getUserById(Integer userId);
 
-    Optional<UserEntity> addUser(UserEntity param);
+    ResponseEntity<ResponseApi> addUser(UserRequestModel param);
 }
