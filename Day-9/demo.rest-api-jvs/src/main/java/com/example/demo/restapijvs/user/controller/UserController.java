@@ -37,4 +37,11 @@ public class UserController {
         var result = userService.addUser(request);
         return result;
     }
+
+    @DeleteMapping("/v1/users/{userId}")
+    public ResponseEntity<ResponseApi> deleteUser(@PathVariable Integer userId) {
+        log.info(" --- [LOG] DELETE/v1/users/{userId} is called");
+        var result = userService.deleteUser(userId);
+        return result;
+    }
 }

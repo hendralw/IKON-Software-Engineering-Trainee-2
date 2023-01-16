@@ -47,6 +47,7 @@ public class UserServiceImpl implements UserService {
                 var data = result.stream().map(x -> modelMapper.map(x, UserResponseModel.class)).toList();
                 return new ResponseEntity<>(responseApi.HttpStatusOK("Success get data", data), customHeader, HttpStatus.OK);
             }
+            log.info(correlationId + " --- [LOG] Data not found from database");
             return new ResponseEntity<>(responseApi.DataNotFound(), customHeader, HttpStatus.FORBIDDEN);
         } catch (Exception ex) {
             log.error(correlationId + " --- [LOG] Error exception -> " + ex);
@@ -63,18 +64,20 @@ public class UserServiceImpl implements UserService {
             log.info(correlationId + " --- [LOG] userRepository.findById is called");
             var result = userRepository.findById(userId);
             var resultJson = new Json<>().toJson(result);
-            log.info(correlationId + " --- [LOG] result : " + resultJson);
+            log.info(correlationId + " --- [LOG] Result from userRepository -> : " + resultJson);
             if (!result.isEmpty()) {
                 var data = modelMapper.map(result, UserResponseModel.class);
                 return new ResponseEntity<>(responseApi.HttpStatusOK("Success get Data", data), headers, HttpStatus.OK);
             }
+            log.info(correlationId + " --- [LOG] Data not found from database");
             return new ResponseEntity<>(responseApi.DataNotFound(), headers, HttpStatus.FORBIDDEN);
         } catch (Exception ex) {
-            log.error(correlationId + " --- [LOG] Error exception : " + ex);
+            log.error(correlationId + " --- [LOG] Error exception -> " + ex);
             return new ResponseEntity<>(responseApi.InternalServerError(ex), headers, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
+    @Override
     public ResponseEntity<ResponseApi> addUser(UserRequestModel request) {
         var correlationId = new Headers().GenerateCorrelationId();
         var headers = new Headers().SetCorrelationId(correlationId);
@@ -95,13 +98,35 @@ public class UserServiceImpl implements UserService {
             var result = userRepository.findById(newId);
             if (!result.isEmpty()) {
                 var resultJson = new Json<>().toJson(result);
-                log.info(correlationId + " --- [LOG] result : " + resultJson);
+                log.info(correlationId + " --- [LOG] Result from userRepository -> " + resultJson);
                 var data = modelMapper.map(result, UserResponseModel.class);
                 return new ResponseEntity<>(responseApi.HttpStatusOK("Success add Data", data), headers, HttpStatus.OK);
             }
+            log.info(correlationId + " --- [LOG] Data not found from database");
             return new ResponseEntity<>(responseApi.DataNotFound(), headers, HttpStatus.FORBIDDEN);
         } catch (Exception ex) {
-            log.error(correlationId + " --- [LOG] Error exception : " + ex);
+            log.error(correlationId + " --- [LOG] Error exception -> " + ex);
+            return new ResponseEntity<>(responseApi.InternalServerError(ex), headers, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @Override
+    public ResponseEntity<ResponseApi> deleteUser(Integer userId) {
+        var correlationId = new Headers().GenerateCorrelationId();
+        var headers = new Headers().SetCorrelationId(correlationId);
+        try {
+            log.info(correlationId + " --- [LOG] UserServiceImpl/deleteUser is called");
+            log.info(correlationId + " --- [LOG] userRepository.findById is called");
+            var getUserById = userRepository.findById(userId);
+            if (!getUserById.isEmpty()) {
+                log.info(correlationId + " --- [LOG] UserId -> " + userId + " is deleted");
+                userRepository.deleteById(userId);
+                return new ResponseEntity<>(responseApi.HttpStatusOK("Success delete Data", null), headers, HttpStatus.OK);
+            }
+            log.info(correlationId + " --- [LOG] Data not found from database");
+            return new ResponseEntity<>(responseApi.DataNotFound(), headers, HttpStatus.FORBIDDEN);
+        } catch (Exception ex) {
+            log.error(correlationId + " --- [LOG] Error exception -> " + ex);
             return new ResponseEntity<>(responseApi.InternalServerError(ex), headers, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
