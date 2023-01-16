@@ -47,6 +47,7 @@ public class UserController {
 
     @PutMapping("/v1/users")
     public ResponseEntity<ResponseApi> updateUser(@RequestBody UserRequestModel request) {
+        log.info(" --- [LOG] PUT/v1/users is called");
         var result = userService.updateUser(request);
         return result;
     }

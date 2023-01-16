@@ -12,9 +12,9 @@ public interface UserService {
 
     ResponseEntity<ResponseApi> getUserById(Integer userId);
 
-    ResponseEntity<ResponseApi> addUser(UserRequestModel param);
+    ResponseEntity<ResponseApi> addUser(UserRequestModel request);
 
     ResponseEntity<ResponseApi> deleteUser(Integer userId);
 
-    ResponseEntity<ResponseApi> updateUser(UserRequestModel param);
+    ResponseEntity<ResponseApi> updateUser(UserRequestModel request);
 }

@@ -22,19 +22,13 @@ public class UserEntity {
     @Column(name = "name")
     @Getter
     @Setter
-    @NotNull(message = "name must not be null")
-    @NotBlank(message = "name must not be blank")
     private String name;
     @Column(name = "email")
     @Getter
     @Setter
-    @NotNull(message = "email must not be null")
-    @NotBlank(message = "email must not be blank")
     private String email;
     @Column(name = "password")
     @Getter
     @Setter
-    @NotNull(message = "password must not be null")
-    @NotBlank(message = "password must not be blank")
     private String password;
 }

@@ -6,3 +6,12 @@ values
 (3, 'febri', 'febri@gmail.com', '123'),
 (4, 'rony', 'rony@gmail.com', '123'),
 (5, 'nelsen', 'nelsen@gmail.com', '123');
+
+insert into
+springboot_product_tbl (id, name)
+values
+(1, 'buku'),
+(2, 'pensil'),
+(3, 'penghapus'),
+(4, 'penggaris'),
+(5, 'tas');
