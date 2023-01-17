@@ -1,40 +1,73 @@
-package com.example.demo.restapijvs.user.service;
+package com.example.demo.restapijvs.user.adapter.persistence;
 
 import com.example.demo.restapijvs.user.entity.UserEntity;
-import com.example.demo.restapijvs.user.model.UserResponseModel;
 import com.example.demo.restapijvs.user.model.UserRequestModel;
-import com.example.demo.restapijvs.user.repository.UserRepository;
+import com.example.demo.restapijvs.user.model.UserResponseModel;
+import com.example.demo.restapijvs.user.service.out.*;
 import com.example.demo.restapijvs.utils.Headers;
 import com.example.demo.restapijvs.utils.Json;
 import com.example.demo.restapijvs.utils.ResponseApi;
 import com.example.demo.restapijvs.utils.ValidationApi;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Service
+@Component
+@RequiredArgsConstructor
 @Slf4j
-public class UserServiceImpl implements UserService {
-    @Autowired(required = false)
-    UserRepository userRepository;
+public class UserPersistence implements CreateUserPort, GetAllUserPort, GetUserByIdPort, DeleteUserPort, UpdateUserPort {
+    private final UserRepository userRepository;
+    private final ResponseApi responseApi;
+    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     @Autowired
-    private ModelMapper modelMapper;
-    @Autowired
-    ResponseApi responseApi;
-    @Autowired
-    Json json;
+    private final ModelMapper modelMapper;
     @Autowired
     Headers headers;
-    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    @Autowired
+    Json json;
 
     @Override
-    public ResponseEntity<ResponseApi> getUsers() {
+    public ResponseEntity<ResponseApi> createUser(UserRequestModel request) {
+        var correlationId = new Headers().GenerateCorrelationId();
+        var headers = new Headers().SetCorrelationId(correlationId);
+        try {
+            log.info(correlationId + " --- [LOG] UserServiceImpl/addUser is called");
+            log.info(correlationId + " --- [LOG] Validation request is called");
+            var validate = new ValidationApi<>(request).Validate();
+            if (!validate.equals("")) {
+                log.info(correlationId + " --- [LOG] Validation went wrong : " + validate);
+                return new ResponseEntity<>(responseApi.BadRequest(validate), headers, HttpStatus.BAD_REQUEST);
+            }
+            long size = userRepository.count();
+            int newId = (int) size + 1;
+            UserEntity newUser = new UserEntity(
+                    newId, request.getName(), request.getEmail(), passwordEncoder.encode(request.getPassword())
+            );
+            userRepository.save(newUser);
+            var result = userRepository.findById(newId);
+            if (!result.isEmpty()) {
+                var resultJson = new Json<>().toJson(result);
+                log.info(correlationId + " --- [LOG] Result from userRepository -> " + resultJson);
+                var data = modelMapper.map(result, UserResponseModel.class);
+                return new ResponseEntity<>(responseApi.HttpStatusOK("Success add Data", data), headers, HttpStatus.OK);
+            }
+            log.info(correlationId + " --- [LOG] Data not found from database");
+            return new ResponseEntity<>(responseApi.DataNotFound(), headers, HttpStatus.FORBIDDEN);
+        } catch (Exception ex) {
+            log.error(correlationId + " --- [LOG] Error exception -> " + ex);
+            return new ResponseEntity<>(responseApi.InternalServerError(ex), headers, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @Override
+    public ResponseEntity<ResponseApi> getAllUser() {
         var correlationId = headers.GenerateCorrelationId();
         var customHeader = headers.SetCorrelationId(correlationId);
         try {
@@ -68,39 +101,6 @@ public class UserServiceImpl implements UserService {
             if (!result.isEmpty()) {
                 var data = modelMapper.map(result, UserResponseModel.class);
                 return new ResponseEntity<>(responseApi.HttpStatusOK("Success get Data", data), headers, HttpStatus.OK);
-            }
-            log.info(correlationId + " --- [LOG] Data not found from database");
-            return new ResponseEntity<>(responseApi.DataNotFound(), headers, HttpStatus.FORBIDDEN);
-        } catch (Exception ex) {
-            log.error(correlationId + " --- [LOG] Error exception -> " + ex);
-            return new ResponseEntity<>(responseApi.InternalServerError(ex), headers, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @Override
-    public ResponseEntity<ResponseApi> addUser(UserRequestModel request) {
-        var correlationId = new Headers().GenerateCorrelationId();
-        var headers = new Headers().SetCorrelationId(correlationId);
-        try {
-            log.info(correlationId + " --- [LOG] UserServiceImpl/addUser is called");
-            log.info(correlationId + " --- [LOG] Validation request is called");
-            var validate = new ValidationApi<>(request).Validate();
-            if (!validate.equals("")) {
-                log.info(correlationId + " --- [LOG] Validation went wrong : " + validate);
-                return new ResponseEntity<>(responseApi.BadRequest(validate), headers, HttpStatus.BAD_REQUEST);
-            }
-            long size = userRepository.count();
-            int newId = (int) size + 1;
-            UserEntity newUser = new UserEntity(
-                    newId, request.getName(), request.getEmail(), passwordEncoder.encode(request.getPassword())
-            );
-            userRepository.save(newUser);
-            var result = userRepository.findById(newId);
-            if (!result.isEmpty()) {
-                var resultJson = new Json<>().toJson(result);
-                log.info(correlationId + " --- [LOG] Result from userRepository -> " + resultJson);
-                var data = modelMapper.map(result, UserResponseModel.class);
-                return new ResponseEntity<>(responseApi.HttpStatusOK("Success add Data", data), headers, HttpStatus.OK);
             }
             log.info(correlationId + " --- [LOG] Data not found from database");
             return new ResponseEntity<>(responseApi.DataNotFound(), headers, HttpStatus.FORBIDDEN);

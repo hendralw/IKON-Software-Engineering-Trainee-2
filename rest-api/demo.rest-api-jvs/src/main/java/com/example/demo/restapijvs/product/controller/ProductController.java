@@ -1,10 +1,7 @@
 package com.example.demo.restapijvs.product.controller;
 
 import com.example.demo.restapijvs.product.model.ProductRequestModel;
-import com.example.demo.restapijvs.product.model.ProductResponseModel;
 import com.example.demo.restapijvs.product.service.ProductService;
-import com.example.demo.restapijvs.user.model.UserRequestModel;
-import com.example.demo.restapijvs.user.service.UserService;
 import com.example.demo.restapijvs.utils.ResponseApi;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
