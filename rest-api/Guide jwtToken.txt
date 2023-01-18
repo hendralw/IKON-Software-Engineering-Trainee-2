@@ -1,0 +1,22 @@
+List User
+
+(1, 'hendra', 'hendra@gmail.com', '08123456789', 'password'),
+(2, 'beni', 'beni@gmail.com', '08123456780', '123'),
+(3, 'febri', 'febri@gmail.com', '08123456781', '123'),
+(4, 'rony', 'rony@gmail.com', '08123456782', '123'),
+(5, 'nelsen', 'nelsen@gmail.com','08123456783', '123');
+
+How to use :
+
+POST http://localhost:8080/api/v2/auth/login
+
+{
+    "phone": "08123456780",
+    "password" : "123"
+}
+
+GET http://localhost:8080/api/v2/auth/info
+
+Authorization : Bearer Token
+
+Don't use "Bearer" in front of jwtToken, just copy paste jwtToken
