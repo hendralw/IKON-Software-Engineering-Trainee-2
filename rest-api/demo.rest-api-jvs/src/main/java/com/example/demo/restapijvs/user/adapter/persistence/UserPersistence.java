@@ -48,7 +48,7 @@ public class UserPersistence implements CreateUserPort, GetAllUserPort, GetUserB
             long size = userRepository.count();
             int newId = (int) size + 1;
             UserEntity newUser = new UserEntity(
-                    newId, request.getName(), request.getEmail(), passwordEncoder.encode(request.getPassword())
+                    newId, request.getName(), request.getEmail(), request.getPhone(), passwordEncoder.encode(request.getPassword())
             );
             userRepository.save(newUser);
             var result = userRepository.findById(newId);

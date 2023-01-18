@@ -17,6 +17,9 @@ public class UserRequestModel {
     @NotNull(message = "email must not be null")
     @NotBlank(message = "email must not be blank")
     private String email;
+    @NotNull(message = "phone must not be null")
+    @NotBlank(message = "phone must not be blank")
+    private String phone;
     @NotNull(message = "password must not be null")
     @NotBlank(message = "password must not be blank")
     private String password;

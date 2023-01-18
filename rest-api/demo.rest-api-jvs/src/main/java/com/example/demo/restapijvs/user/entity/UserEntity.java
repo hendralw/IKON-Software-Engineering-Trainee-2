@@ -27,6 +27,10 @@ public class UserEntity {
     @Getter
     @Setter
     private String email;
+    @Column(name = "phone")
+    @Getter
+    @Setter
+    private String phone;
     @Column(name = "password")
     @Getter
     @Setter
