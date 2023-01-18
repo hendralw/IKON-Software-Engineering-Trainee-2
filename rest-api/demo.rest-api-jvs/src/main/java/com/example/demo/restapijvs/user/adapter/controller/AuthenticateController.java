@@ -11,12 +11,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.http.HttpResponse;
+import java.util.HashMap;
 
 @RestController
 @RequiredArgsConstructor
@@ -51,5 +49,19 @@ public class AuthenticateController {
             return new ResponseEntity<>(responseApi.HttpStatusOK("Success authentication", data), HttpStatus.OK);
         }
         return new ResponseEntity<>(responseApi.BadRequest("Invalid phone and password"), HttpStatus.BAD_REQUEST);
+    }
+
+    @GetMapping("/info")
+    public ResponseEntity<ResponseApi> authenticate(@RequestHeader("Authorization") String authHeader) {
+
+        if (authHeader == null && !authHeader.startsWith("Bearer"))
+        {
+            return new ResponseEntity<>(responseApi.BadRequest("Invalid phone and password"), HttpStatus.BAD_REQUEST);
+        }
+        String jwtToken = authHeader.substring(7);
+        String data = jwtUtils.extractUsername(jwtToken);
+        HashMap<String, String> hashmap = new HashMap<>();
+        hashmap.put("phone", data);
+        return new ResponseEntity<>(responseApi.HttpStatusOK("Success authentication", hashmap), HttpStatus.OK);
     }
 }
