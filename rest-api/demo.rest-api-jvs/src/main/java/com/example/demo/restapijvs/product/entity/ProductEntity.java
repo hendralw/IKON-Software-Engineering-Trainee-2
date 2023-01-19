@@ -14,11 +14,13 @@ import lombok.*;
 public class ProductEntity {
     @Id
     @Column(name = "id")
-    @Getter
-    @Setter
     private int id;
     @Column(name = "name")
-    @Getter
-    @Setter
     private String name;
+    @Column(name = "description")
+    private String description;
+    @Column(name = "stock")
+    private int stock;
+    @Column(name = "price")
+    private double price;
 }

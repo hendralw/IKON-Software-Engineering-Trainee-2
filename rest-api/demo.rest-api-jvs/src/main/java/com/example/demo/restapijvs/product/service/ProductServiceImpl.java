@@ -90,7 +90,7 @@ public class ProductServiceImpl implements ProductService {
             long size = productRepository.count();
             int newId = (int) size + 1;
             ProductEntity newProduct = new ProductEntity(
-                    newId, request.getName()
+                    newId, request.getName(), request.getDescription(), request.getStock(), request.getPrice()
             );
             productRepository.save(newProduct);
             var result = productRepository.findById(newId);

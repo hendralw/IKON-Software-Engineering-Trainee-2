@@ -8,5 +8,8 @@ CREATE TABLE springboot_user_tbl (
 
 CREATE TABLE springboot_product_tbl (
     id int primary key,
-    name varchar
+    name varchar,
+    description varchar,
+    stock int,
+    price float
 );
