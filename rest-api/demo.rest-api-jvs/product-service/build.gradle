@@ -38,6 +38,7 @@ dependencies {
     testImplementation 'org.mockito:mockito-core'
     testImplementation 'org.jeasy:easy-random-core:4.3.0'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    implementation 'org.postgresql:postgresql:42.5.1'
 }
 
 tasks.named('test') {
