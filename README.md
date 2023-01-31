@@ -2,13 +2,14 @@
 
 hostname | port
 ------------- | -------------
-http://54.249.152.230 | 8080
+springboot | 8081
+redis | 6366
 
 endpoint  | method | auth | request body
 ------------- | ------------- | ------------- | -------------
-http://54.249.152.230:8080/api/v2/auth/login | POST | - | {"password":"password","phone":"08123456789"}
-http://54.249.152.230:8080/api/v2/users | GET | Bearer Token | 
-http://54.249.152.230:8080/api/v2/users/:id | GET | Bearer Token | 
-http://54.249.152.230:8080/api/v2/users | POST | Bearer Token | {"name":"riko","email":"hendra@gmail.com","phone":"0891234567","password":"password"}
-http://localhost:8081/books/:id | PUT | Bearer Token | {"id": 5,"name":"riko","email":"hendra@gmail.com","phone":"123123123","password":"password"}
-http://54.249.152.230:8080/api/v2/users/:id | DELETE | Bearer Token | 
+http://localhost:8081/api/v2/auth/login | POST | - | {"password":"password","phone":"08123456789"}
+http://localhost:8081/books | GET | Bearer Token | 
+http://localhost:8081/books/:id | GET | Bearer Token | 
+http://localhost:8081/books | POST | Bearer Token | {"id":1,"isbn":"123123123","judul":"Buku baru","penulis":"Hendra","deskripsi":"Deskripsi buku","kategori":"Novel"}
+http://localhost:8081/books/:id | PUT | Bearer Token | {"isbn":"123123123","judul":"Buku baru","penulis":"Hendra","deskripsi":"Deskripsi buku","kategori":"Novel"}
+http://localhost:8081/books/:id | DELETE | Bearer Token | 
